@@ -14,7 +14,7 @@ public class User {
         this.username = username;
         this.password = password;
         this.userRole = userRole;
-        this.id = aDB.createMember(fullname, username, password, userRole);
+        this.id = aDB.createUser(fullname, username, password, userRole);
     }
 
     //getters
@@ -30,7 +30,7 @@ public class User {
         return password;
     }
 
-    public String getMemberRole() {
+    public String getUserRole() {
         return userRole;
     }
 
