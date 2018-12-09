@@ -1,23 +1,25 @@
 import java.util.Date;
 
-public class Issue extends Message {
+public class Issue {
 
-    public Issue(String aContent, Date aDate) {
-        super(aContent, aDate);
+    private Date date;
+    private String content;
+
+    public Issue(Date date, String content) {
+        this.date = date;
+        this.content = content;
     }
 
-    @Override
-    String getContent() {
-        return content;
-    }
-
-    @Override
-    Date getDate() {
+    //getters
+    public Date getDate() {
         return date;
     }
 
-    @Override
-    void setContent(String aContent) {
-        content = aContent;
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }
