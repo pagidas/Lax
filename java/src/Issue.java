@@ -2,8 +2,8 @@ import java.util.Date;
 
 public class Issue {
 
-    Date date;
-    String content;
+    private Date date;
+    private String content;
 
     public Issue(Date date, String content) {
         this.date = date;

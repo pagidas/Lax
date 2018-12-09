@@ -1,14 +1,14 @@
 public class Member {
 
     int id;
-    private String fullname, username, password, userRole;
+    private String fullname, username, password, memberRole;
     public static final String roles[] = {"Admin", "Manager", "Designer", "Developer"};
 
-    public Member(String fullname, String username, String password, String userRole) {
+    public Member(String fullname, String username, String password, String memberRole) {
         this.fullname = fullname;
         this.username = username;
         this.password = password;
-        this.userRole = userRole;
+        this.memberRole = memberRole;
     }
 
     //getters
@@ -24,8 +24,8 @@ public class Member {
         return password;
     }
 
-    public String getUserRole() {
-        return userRole;
+    public String getMemberRole() {
+        return memberRole;
     }
 
     public static String[] getRoles() {
