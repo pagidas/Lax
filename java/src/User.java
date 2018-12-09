@@ -1,10 +1,10 @@
-public class Member {
+public class User {
 
     int id;
     private String fullname, username, password, memberRole;
     public static final String roles[] = {"Admin", "Manager", "Designer", "Developer"};
 
-    public Member(String fullname, String username, String password, String memberRole) {
+    public User(String fullname, String username, String password, String memberRole) {
         this.fullname = fullname;
         this.username = username;
         this.password = password;
