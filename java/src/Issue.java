@@ -2,6 +2,7 @@ import java.util.Date;
 
 public class Issue {
 
+    private int id;
     private Date date;
     private String content;
 

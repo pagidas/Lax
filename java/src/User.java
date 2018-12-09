@@ -1,6 +1,6 @@
 public class User {
 
-    int id;
+    private int id;
     private String fullname, username, password, userRole;
     public static final String roles[] = {"Manager", "Designer", "Developer"};
 
