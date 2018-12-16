@@ -17,6 +17,7 @@ public class AdminMenu {
         mainmenu.setTitle("*** My Main Menu ***");
         mainmenu.addItem(new MenuItem("Create a user", mainmenu, "createUser"));
         mainmenu.addItem(new MenuItem("Delete a user", mainmenu, "deleteUser"));
+        mainmenu.addItem(new MenuItem("Logout", mainmenu, "logout"));
 
         AdminMenu adminMenu = new AdminMenu(mainmenu);
     }
