@@ -18,6 +18,9 @@ public class User {
         setId(id);
     }
 
+    //default constructor
+    //public User(){}
+
     public String getFullname() {
         return fullname;
     }
@@ -38,23 +41,23 @@ public class User {
         return roles;
     }
 
-    private void setId(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    private void setFullname(String fullname) {
+    public void setFullname(String fullname) {
         this.fullname = fullname;
     }
 
-    private void setUsername(String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
-    private void setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
-    private void setUserRole(String userRole) {
+    public void setUserRole(String userRole) {
         this.userRole = userRole;
     }
 

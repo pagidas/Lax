@@ -4,10 +4,14 @@ import model.User;
 
 public class UserDao {
 
-    public User getUser() {
-        User u = new User();
+    public User getUser(int id) {
+        //open connection
 
-        return u;
+        //execute sql query
+
+        //retrieve data from ResultSet
+
+        return User.createUser(id, fullname, username, password, userRole);
     }
     public boolean insertUser() {}
     public boolean updateUser() {}
