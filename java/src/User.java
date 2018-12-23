@@ -12,7 +12,7 @@ public class User {
         setUsername(username);
         setPassword(password);
         setUserRole(userRole);
-        setId(0); //fix id, a createUser by a database which wil return the updated id
+        setId(id); //id taken by Admin method via the Controller is Updated, using a Database method.
     }
 
     public String getFullname() {
@@ -62,39 +62,6 @@ public class User {
      */
     public static User createUser(int id, String fullname, String username, String password, String userRole) {
         User u = new User(id, fullname, username, password, userRole);
-
-        return u;
-    }
-
-    /*
-     * --- Update for User ---
-     * These methods wil be called by the Controller class.
-     * id must be updated
-     */
-    public User updateUserFullname(int id, User u, String fullname) {
-        u.setFullname(fullname);
-        u.setId(id);
-
-        return u;
-    }
-
-    public User updateUserUsername(int id, User u, String username) {
-        u.setUsername(username);
-        u.setId(id);
-
-        return u;
-    }
-
-    public User updateUserPassword(int id, User u, String password) {
-        u.setPassword(password);
-        u.setId(id);
-
-        return u;
-    }
-
-    public User updateUserRole(int id, User u, String userRole) {
-        u.setUserRole(userRole);
-        u.setId(id);
 
         return u;
     }
