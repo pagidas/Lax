@@ -12,7 +12,7 @@ public class User {
         setUsername(username);
         setPassword(password);
         setUserRole(userRole);
-        setId(id); //id taken by Admin method via the Controller is Updated, using a Database method.
+        setId(id);
     }
 
     public String getFullname() {
