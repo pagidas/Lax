@@ -6,20 +6,18 @@ public class User {
     private String fullname, username, password, userRole;
     public static final String roles[] = {"Manager", "Designer", "Developer"};
 
+
     /*
-     *  Parameterized constructor to create a model.User, calling
-     *  another method from Database class which executes the
-     *  query with the parameters given.
+     *  Parameterized constructor
      */
-    public User(Database aDB, String fullname, String username, String password, String userRole) {
-        this.fullname = fullname;
-        this.username = username;
-        this.password = password;
-        this.userRole = userRole;
-        this.id = aDB.createUser(fullname, username, password, userRole);
+    private User(int id, String fullname, String username, String password, String userRole) {
+        setFullname(fullname);
+        setUsername(username);
+        setPassword(password);
+        setUserRole(userRole);
+        setId(id);
     }
 
-    //getters
     public String getFullname() {
         return fullname;
     }
@@ -40,5 +38,34 @@ public class User {
         return roles;
     }
 
-    //setters?
+    private void setId(int id) {
+        this.id = id;
+    }
+
+    private void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    private void setUsername(String username) {
+        this.username = username;
+    }
+
+    private void setPassword(String password) {
+        this.password = password;
+    }
+
+    private void setUserRole(String userRole) {
+        this.userRole = userRole;
+    }
+
+    /*
+     *  --- Create for User ---
+     *  This method wil be called by the Controller class
+     *  and it's gonna call the constructor to create the object
+     */
+    public static User createUser(int id, String fullname, String username, String password, String userRole) {
+        User u = new User(id, fullname, username, password, userRole);
+
+        return u;
+    }
 }
