@@ -1,3 +1,5 @@
+package model;
+
 public class User {
 
     private int id;
@@ -5,7 +7,7 @@ public class User {
     public static final String roles[] = {"Manager", "Designer", "Developer"};
 
     /*
-     *  Parameterized constructor to create a User, calling
+     *  Parameterized constructor to create a model.User, calling
      *  another method from Database class which executes the
      *  query with the parameters given.
      */
