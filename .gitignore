@@ -27,3 +27,4 @@ hs_err_pid*
 # my files
 .idea
 *.iml
+out
