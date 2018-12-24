@@ -6,4 +6,11 @@ public class Admin {
         this.username = username;
         this.password = password;
     }
+
+    public static void createUser(int id, String fullname, String username, String password, String userRole) {
+        User.createUser(id, fullname, username, password, userRole);
+    }
+
+    //public static void deleteUser()
 }
+    
