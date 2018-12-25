@@ -18,8 +18,7 @@ public class User {
         setId(id);
     }
 
-    //default constructor
-    //public User(){}
+    public User(){}
 
     public String getFullname() {
         return fullname;
