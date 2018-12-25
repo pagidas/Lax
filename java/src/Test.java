@@ -8,12 +8,14 @@ public class Test {
 
     public static void main(String[] args) {
 
-        User aUser = UserDao.getUser(2);
-        System.out.println(aUser.getFullname());
+        int id = 2;
+        User aUser = UserDao.getUser(id);
+        System.out.println("The user with id='"+id+"' is "+aUser.getFullname()+"\n");
 
         Set<User> users =  UserDao.getAllUsers();
+        System.out.println("All the users are...");
         for(User u : users) {
-            System.out.println(aUser);
+            System.out.println(u);
         }
     }
 }
