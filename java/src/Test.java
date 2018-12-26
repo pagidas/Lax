@@ -12,6 +12,7 @@ public class Test {
 
         //Test fields
         int id = 2;
+        int deletedId = 2;
 
 
         User theUser = UserDao.getUser(id);
@@ -62,5 +63,8 @@ public class Test {
         for(User u : users) {
             System.out.println(u);
         }
+
+        System.out.println("Deleting a user with id="+deletedId);
+        UserDao.deleteUser(deletedId);
     }
 }

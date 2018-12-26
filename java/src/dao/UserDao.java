@@ -62,6 +62,18 @@ public class UserDao {
         return false;
     }
 
+    public static boolean deleteUser(int id) {
+        StringBuilder sqlQuery = new StringBuilder("DELETE FROM `lax_db`.`users` WHERE id="+id+";");
+
+        int affectedRow = MyDB.connectAndExecute(String.valueOf(sqlQuery), (byte)1);
+
+        if(affectedRow == 1) {
+            return true;
+        }
+
+        return false;
+    }
+
     public static boolean updateUser(User aUser) {
         StringBuilder sqlQuery = new StringBuilder("UPDATE `lax_db`.`users` SET fullName='"+aUser.getFullname()+"', ")
                 .append("username='"+aUser.getUsername()+"', ")
@@ -77,8 +89,6 @@ public class UserDao {
 
         return false;
     }
-
-//    public boolean deleteUser() {}
 
     /*
      *  This method fetches data from ResultSet and creates a User
