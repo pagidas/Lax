@@ -11,7 +11,7 @@ public class Test {
     public static void main(String[] args) {
 
         //Test fields
-        int id = 2;
+        int id = 3;
         int deletedId = 2;
 
 
@@ -64,7 +64,15 @@ public class Test {
             System.out.println(u);
         }
 
-        System.out.println("Deleting a user with id="+deletedId);
+        System.out.println("Deleting a user with id="+deletedId+"\n");
         UserDao.deleteUser(deletedId);
+
+        System.out.println("Getting a User by username and password...");
+        System.out.print("username: ");
+        String uname = in.nextLine();
+        System.out.print("password: ");
+        String pwd = in.nextLine();
+        User authenticUser = UserDao.getUserByUsernameAndPassword(uname, pwd);
+        System.out.println(authenticUser);
     }
 }
