@@ -48,6 +48,24 @@ public class UserDao {
         return null;
     }
 
+    public static User getUserByUsernameAndPassword(String username, String password) {
+        StringBuilder sqlQuery = new StringBuilder("SELECT * FROM `lax_db`.`users` ")
+                .append("WHERE username='"+username+"' AND password='"+password+"';");
+
+        ResultSet result = MyDB.connectAndExecute(String.valueOf(sqlQuery), (byte)0);
+
+        try {
+            while(result.next()) {
+                User aUser = extractUserFromResultSet(result);
+                return aUser;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return null;
+    }
+
     public static boolean insertUser(User aUser) {
         StringBuilder sqlQuery = new StringBuilder("INSERT INTO `lax_db`.`users` (`fullName`,`username`,`password`,`role`) ")
                 .append("VALUES ('"+aUser.getFullname()+"', '"+aUser.getUsername()+"', ")
