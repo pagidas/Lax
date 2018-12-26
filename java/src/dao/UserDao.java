@@ -1,6 +1,5 @@
 package dao;
 
-import database.Database;
 import database.MyDB;
 import model.User;
 import java.sql.ResultSet;
