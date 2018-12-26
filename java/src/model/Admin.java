@@ -9,8 +9,10 @@ public class Admin {
         this.password = password;
     }
 
-    public static void createUser(int id, String fullname, String username, String password, String userRole) {
-        User.createUser(id, fullname, username, password, userRole);
+    public static User createUser(String fullname, String username, String password, String userRole) {
+        User aUser =  User.createUser(fullname, username, password, userRole);
+
+        return aUser;
     }
 
     //public static void deleteUser()

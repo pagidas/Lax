@@ -8,7 +8,7 @@ public class User {
 
 
     /*
-     *  Parameterized constructor
+     *  Parameterized constructor when fetching User's data from a Database
      */
     private User(int id, String fullname, String username, String password, String userRole) {
         setFullname(fullname);
@@ -16,6 +16,15 @@ public class User {
         setPassword(password);
         setUserRole(userRole);
         setId(id);
+    }
+    /*
+     *  Parameterized constructor when creating a new User and the ID is updated by the Database
+     */
+    private User(String fullname, String username, String password, String userRole) {
+        setFullname(fullname);
+        setUsername(username);
+        setPassword(password);
+        setUserRole(userRole);
     }
 
     public User(){}
@@ -34,6 +43,10 @@ public class User {
 
     public String getUserRole() {
         return userRole;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public static String[] getRoles() {
@@ -60,11 +73,12 @@ public class User {
         this.userRole = userRole;
     }
 
-    /*
-     *  --- Create for User ---
-     *  This method wil be called by the Controller class
-     *  and it's gonna call the constructor to create the object
-     */
+    public static User createUser(String fullname, String username, String password, String userRole) {
+        User u = new User(fullname, username, password, userRole);
+
+        return u;
+    }
+
     public static User createUser(int id, String fullname, String username, String password, String userRole) {
         User u = new User(id, fullname, username, password, userRole);
 
