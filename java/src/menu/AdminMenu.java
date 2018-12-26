@@ -2,7 +2,9 @@ package menu;
 
 public class AdminMenu {
 
-    private static Menu mainmenu = null;
+    private static Menu mainmenu;
+
+    private AdminMenu() {}
 
     private AdminMenu(Menu mainmenu) {
         this.mainmenu = mainmenu;
