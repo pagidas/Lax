@@ -2,30 +2,17 @@ package menu;
 
 public class AdminMenu {
 
-    private static Menu mainmenu = null;
-
-    private AdminMenu(Menu mainmenu) {
-        this.mainmenu = mainmenu;
-    }
-
-    /*
-     *  This Method which creates a basic Menu with two MenuItem instances,
-     *  calls the private constructor and passes the final menu
-     */
-    public static void createTheMenu() {
-        Menu mainmenu = new Menu();
-        mainmenu.setTitle("*** My Main Menu ***");
-        mainmenu.addItem(new MenuItem("Create a user", mainmenu, "createUser"));
-        mainmenu.addItem(new MenuItem("Delete a user", mainmenu, "deleteUser"));
-        mainmenu.addItem(new MenuItem("Logout", mainmenu, "logout"));
-
-        AdminMenu adminMenu = new AdminMenu(mainmenu);
-    }
+    private static Menu adminMenu = new Menu();
+    private static MenuItem menuItem1 = new MenuItem("Create a user", adminMenu, "createUser");
+    private static MenuItem menuItem2 = new MenuItem("Delete a user", adminMenu, "deleteUser");
+    private static MenuItem menuItem3 = new MenuItem("Logout", adminMenu, "logout");
 
     /*
-     * This Method displays the Admin's mainmenu, running the execute() in Menu class
+     * This Method displays the Admin's mainmenu, running the execute() off the Menu class
      */
     public static void displayMenu() {
-        mainmenu.execute();
+        adminMenu.execute();
     }
+
+
 }
