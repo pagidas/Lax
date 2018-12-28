@@ -1,19 +1,14 @@
 package view;
 
-import menu.AdminMenu;
-import menu.DesignerMenu;
-import menu.DeveloperMenu;
-import menu.ManagerMenu;
-
 public class Dispatcher {
 
-    private AdminMenu adminView;
-    private DesignerMenu designerView;
-    private DeveloperMenu developerView;
-    private ManagerMenu managerView;
+    private AdminView adminView;
+    private DesignerView designerView;
+    private DeveloperView developerView;
+    private ManagerView managerView;
 
     public Dispatcher() {
-        adminView = AdminMenu.createTheMenu();
+        adminView = AdminView.createTheMenu();
         //designerView
         //managerView
         //developerView
@@ -23,9 +18,23 @@ public class Dispatcher {
     //developerMenu
 
     public void dispatch(String request) {
+
+        //Views
         if(request.equalsIgnoreCase("ADMIN")) {
             adminView.displayMenu();
         }
+        if(request.equalsIgnoreCase("DESIGNER")) {
+            //displayMenu()
+        }
+        if(request.equalsIgnoreCase("DEVELOPER")) {
+            //displayMenu()
+        }
+        if(request.equalsIgnoreCase("MANAGER")) {
+            //displayMenu()
+        }
+
+        //Other requests
+
     }
 
 }

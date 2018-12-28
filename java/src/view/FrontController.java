@@ -1,26 +1,29 @@
 package view;
 
-import java.awt.*;
+import dao.UserDao;
+import model.User;
 
 public class FrontController {
 
     private Dispatcher dispatcher;
 
-    private FrontController() {}
+    boolean isAuthenticUser(User aUser) {
+        if(aUser != null) {
+            System.out.println("User is authenticated successfully!");
+            return true;
+        }
 
-    private boolean isAuthenticUser() {
-        System.out.println("User is authenticated successfully!");
-        return true;
+        return false;
     }
 
-    private void trackRequest(String request) {
+    void trackRequest(String request) {
         System.out.println("Page requested: "+request);
     }
 
-    private void dispatchRequest(String request) {
+    void dispatchRequest(String request, User aUser) {
         trackRequest(request);
 
-        if(isAuthenticUser()) {
+        if(isAuthenticUser(aUser)) {
             dispatcher.dispatch(request);
         }
 

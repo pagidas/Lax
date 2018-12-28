@@ -1,28 +1,32 @@
-package menu;
+package view;
 
-public class AdminMenu {
+import menu.Menu;
+import menu.MenuItem;
+
+public class AdminView {
 
     private static Menu mainmenu;
+    private static FrontController controller;
 
-    private AdminMenu() {}
+    private AdminView() {}
 
-    private AdminMenu(Menu mainmenu) {
+    private AdminView(Menu mainmenu) {
         this.mainmenu = mainmenu;
     }
 
     /*
      *  This Method which creates a basic Menu with two MenuItem instances,
      *  calls the private constructor and passes the final menu.
-     *  Returns the AdminMenu itself.
+     *  Returns the AdminView itself.
      */
-    public static AdminMenu createTheMenu() {
+    public static AdminView createTheMenu() {
         Menu mainmenu = new Menu();
         mainmenu.setTitle("*** My Main Menu ***");
         mainmenu.addItem(new MenuItem("Create a user", mainmenu, "createUser"));
         mainmenu.addItem(new MenuItem("Delete a user", mainmenu, "deleteUser"));
         mainmenu.addItem(new MenuItem("Logout", mainmenu, "logout"));
 
-        AdminMenu adminMenu = new AdminMenu(mainmenu);
+        AdminView adminMenu = new AdminView(mainmenu);
 
         return adminMenu;
     }
@@ -32,6 +36,22 @@ public class AdminMenu {
      */
     public void displayMenu() {
         mainmenu.execute();
+    }
+
+    public void createUser() {
+        getRequest("CREATE_USER");
+    }
+
+    public void deleteUser() {
+        getRequest("DELETE_USER");
+    }
+
+    public void logout() {
+        getRequest("LOGOUT");
+    }
+
+    public void getRequest(String request) {
+
     }
 
 
