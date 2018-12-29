@@ -3,8 +3,10 @@ package view;
 import dao.UserDao;
 import model.Admin;
 import model.User;
+import sha.SHA256;
 import view.AdminView;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Set;
@@ -78,7 +80,23 @@ public class Test {
 //        User authenticUser = UserDao.getUserByUsernameAndPassword(uname, pwd);
 //        System.out.println(authenticUser);
 
-        AdminView a = new AdminView().createTheMenu();
-        System.out.println((String)a.displayMenu());
+//        AdminView a = new AdminView().createTheMenu();
+//        System.out.println((String)a.displayMenu());
+
+        try {
+            String pwd = SHA256.getSHA256Hex("pagidas");
+            System.out.println(pwd);
+            String pwd2 = SHA256.getSHA256Hex("pagidat");
+            System.out.println(pwd2);
+            if(pwd.equalsIgnoreCase(pwd2)) {
+                System.out.println("SHA256 works!");
+            }
+            else {
+                System.out.println("Not working!");
+            }
+        } catch (NoSuchAlgorithmException ex) {
+            ex.printStackTrace();
+        }
+
     }
 }
