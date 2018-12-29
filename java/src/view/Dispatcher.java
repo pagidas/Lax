@@ -1,25 +1,34 @@
 package view;
 
+import dao.UserDao;
+
 public class Dispatcher {
 
+    //fields about the different Views
     private AdminView adminView;
     private DesignerView designerView;
     private DeveloperView developerView;
     private ManagerView managerView;
 
-    public Dispatcher() {
+    //fields about the different Handlers
+
+    //private default constructor
+    private Dispatcher() {
         //adminView = AdminView.createTheMenu();
         //designerView
         //managerView
         //developerView
     }
-    //designerMenu
-    //managerMenu
-    //developerMenu
 
-    public void dispatch(String request) {
+    static Dispatcher createDispatcher() {
+        Dispatcher d;
 
-        //Views
+        return d = new Dispatcher();
+    }
+
+    void dispatch(String request) {
+
+        //View requests
         if(request.equalsIgnoreCase("ADMIN")) {
             adminView.displayMenu();
         }
@@ -33,7 +42,6 @@ public class Dispatcher {
             //displayMenu()
         }
 
-        //Other requests
-
+        //Handler requests
     }
 }

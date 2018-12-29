@@ -5,7 +5,8 @@ import model.User;
 
 public class FrontController {
 
-    private Dispatcher dispatcher;
+    //declaring a dispatcher in FrontController
+    private final Dispatcher dispatcher = Dispatcher.createDispatcher();
 
     boolean isAuthenticUser(User aUser) {
         if(aUser != null) {
