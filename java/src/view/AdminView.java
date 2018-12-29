@@ -37,22 +37,6 @@ public class AdminView {
     }
 
     /*
-     *  Methods invoked by the Menu, depending on user's action.
-     *  Read Menu.execute() which calls an invoke() on the MenuItem.
-     */
-    public String performCreateUser() {
-        return "CREATE_USER";
-    }
-
-    public String performDeleteUser() {
-        return "DELETE_USER";
-    }
-
-    public String performLogout() {
-        return "LOGOUT";
-    }
-
-    /*
      *  This Method displays the Admin's mainmenu, running the execute() in Menu class.
      *  Returns <T> whatever the 'target' methods return.
      */
@@ -60,5 +44,25 @@ public class AdminView {
         return mainmenu.execute();
     }
 
-    private void getRequest(String request) {}
+    /*
+     *  Methods invoked by the Menu, depending on user's action.
+     *  Read Menu.execute() which calls an invoke() on the MenuItem.
+     */
+    public void performCreateUser() {
+        getRequest("CREATE_USER");
+    }
+
+    public void performDeleteUser() {
+        getRequest("DELETE_USER");
+    }
+
+    public void performLogout() {
+        getRequest("LOGOUT");
+    }
+
+    private void getRequest(String request) {
+        controller = new FrontController();
+
+        controller.dispatchRequest(request);
+    }
 }

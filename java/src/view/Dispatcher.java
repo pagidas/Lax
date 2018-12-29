@@ -1,6 +1,7 @@
 package view;
 
 import dao.UserDao;
+import handler.UserHandler;
 
 public class Dispatcher {
 
@@ -43,5 +44,8 @@ public class Dispatcher {
         }
 
         //Handler requests
+        if(request.equalsIgnoreCase("CREATE_USER")) {
+            UserHandler.createUser();
+        }
     }
 }

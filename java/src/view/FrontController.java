@@ -8,23 +8,19 @@ public class FrontController {
     //declaring a dispatcher in FrontController
     private final Dispatcher dispatcher = Dispatcher.createDispatcher();
 
-    boolean isAuthenticUser(User aUser) {
-        if(aUser != null) {
-            System.out.println("User is authenticated successfully!");
-            return true;
-        }
+    boolean isAuthenticUser() {
 
-        return false;
+        return true;
     }
 
     void trackRequest(String request) {
         System.out.println("Page requested: "+request);
     }
 
-    void dispatchRequest(String request, User aUser) {
+    void dispatchRequest(String request) {
         trackRequest(request);
 
-        if(isAuthenticUser(aUser)) {
+        if(isAuthenticUser()) {
             dispatcher.dispatch(request);
         }
 

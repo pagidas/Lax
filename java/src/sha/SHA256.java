@@ -8,7 +8,7 @@ public class SHA256 {
     private static MessageDigest SHA256;
     private static StringBuffer sb;
 
-    public static String getSHA256Hex(String aPassword) throws NoSuchAlgorithmException {
+    public static String getSHA256HexToString(String aPassword) throws NoSuchAlgorithmException {
         SHA256 = MessageDigest.getInstance("SHA-256");
         sb = new StringBuffer();
 
