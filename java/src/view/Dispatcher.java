@@ -8,7 +8,7 @@ public class Dispatcher {
     private ManagerView managerView;
 
     public Dispatcher() {
-        adminView = AdminView.createTheMenu();
+        //adminView = AdminView.createTheMenu();
         //designerView
         //managerView
         //developerView
@@ -36,5 +36,4 @@ public class Dispatcher {
         //Other requests
 
     }
-
 }

@@ -43,14 +43,14 @@ public class MenuItem {
 	 * approach eliminates the need for a selection process in Menu as each MenuIeem
 	 * can invoke itself.
 	 */
-	void invoke() {
-		if (target == null) return;
-
+	<T> T invoke() {
 		try {
 			Method method = obj.getClass().getMethod(target);
-			method.invoke(obj);
+			return (T) method.invoke(obj);
 		}
 		catch (Exception ex) { ex.printStackTrace(); }
+
+		return null;
 	}
 
 	/* This method tells Menu if 'this' is an exit option or not. */
