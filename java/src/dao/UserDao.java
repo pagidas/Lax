@@ -1,6 +1,5 @@
 package dao;
 
-import database.Database;
 import database.MyDB;
 import model.User;
 import java.sql.ResultSet;
@@ -48,6 +47,10 @@ public class UserDao {
         return null;
     }
 
+    /*
+     * This method is for user authentication. Gets a user from db
+     * by a username and a password and returns a User(object)
+     */
     public static User getUserByUsernameAndPassword(String username, String password) {
         StringBuilder sqlQuery = new StringBuilder("SELECT * FROM `lax_db`.`users` ")
                 .append("WHERE username='"+username+"' AND password='"+password+"';");
@@ -109,7 +112,7 @@ public class UserDao {
     }
 
     /*
-     *  This method fetches data from ResultSet and creates a User
+     *  This method fetches data from ResultSet and creates a User(object)
      */
     public static User extractUserFromResultSet(ResultSet result) throws SQLException {
 

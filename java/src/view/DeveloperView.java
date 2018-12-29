@@ -1,10 +1,13 @@
-package menu;
+package view;
 
-public class DeveloperMenu {
+import menu.Menu;
+import menu.MenuItem;
+
+public class DeveloperView {
 
     private static Menu mainmenu = null;
 
-    private DeveloperMenu(Menu mainmenu) {
+    private DeveloperView(Menu mainmenu) {
         this.mainmenu = mainmenu;
     }
 
@@ -15,7 +18,7 @@ public class DeveloperMenu {
         mainmenu.addItem(new MenuItem("Post an Issue", mainmenu, "postAnIssue"));
         mainmenu.addItem(new MenuItem("Logout", mainmenu, "logout"));
 
-        DeveloperMenu developerMenu = new DeveloperMenu(mainmenu);
+        DeveloperView developerMenu = new DeveloperView(mainmenu);
     }
 
     public static void displayDeveloperMenu() {

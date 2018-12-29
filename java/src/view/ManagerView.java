@@ -1,10 +1,13 @@
-package menu;
+package view;
 
-public class ManagerMenu {
+import menu.Menu;
+import menu.MenuItem;
+
+public class ManagerView {
 
     private static Menu mainmenu = null;
 
-    private ManagerMenu(Menu mainmenu) {
+    private ManagerView(Menu mainmenu) {
         this.mainmenu = mainmenu;
     }
 
@@ -15,7 +18,7 @@ public class ManagerMenu {
         mainmenu.addItem(new MenuItem("View Issues by User", mainmenu, "viewIssuesByUserName"));
         mainmenu.addItem(new MenuItem("Logout", mainmenu, "logout"));
 
-        ManagerMenu managerMenu = new ManagerMenu(mainmenu);
+        ManagerView managerMenu = new ManagerView(mainmenu);
     }
 
     public static void displayManagerMenu() {

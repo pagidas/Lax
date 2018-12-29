@@ -36,13 +36,13 @@ public class Menu {
 			this.isRootMenu = true; // let this instance know it's a root menu
 			this.setTitle("Menu");
 
-			this.exitItem = new MenuItem("Exit"); // A root menu will exit from the program
+//			this.exitItem = new MenuItem("Exit"); // A root menu will exit from the program
 		}
 		else {
 			this.setTitle("Sub Menu");
-			this.exitItem = new MenuItem("Back"); // A sub menu will go back one level
+//			this.exitItem = new MenuItem("Back"); // A sub menu will go back one level
 		}
-		this.exitItem.setExitItem(true); // Let the MenuItem know that it is the exit item for this menu
+//		this.exitItem.setExitItem(true); // Let the MenuItem know that it is the exit item for this menu
 	}
 
 	/*
@@ -58,12 +58,12 @@ public class Menu {
 	 * is looped over until the user selects the exit item which will break the loop and
 	 * return from 'this' menu.
 	 */
-	public void execute() {
+	public <T> T execute() {
 		MenuItem item = null;
 		do {
 			this.print();
 			item = this.getUserInput();
-			item.invoke();
+			return item.invoke();
 		}
 		while(!item.isExitItem());
 	}
@@ -119,7 +119,7 @@ public class Menu {
 		for (int i = 0; i < this.itemList.size(); i++)
 			sb.append("\n" + (i + 1) + "... " + this.itemList.get(i).getLabel());
 
-		sb.append("\n" + getExitIndex() + "... " + exitItem.getLabel());
+//		sb.append("\n" + getExitIndex() + "... " + exitItem.getLabel());
 		sb.append("\n> ");
 
 		System.out.print(sb.toString());
@@ -131,4 +131,6 @@ public class Menu {
 	public String toString() {
 		return "menu=[" + this.title + "]  items=" + this.itemList.toString();
 	}
+
+	public BufferedReader getBufferedReader() { return Menu.in; }
 }
