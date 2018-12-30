@@ -48,14 +48,15 @@ public class UserHandler {
     }
 
     private static String setPassword() {
-        String password = null;
+        String hexPwd = null;
         input = new Scanner(System.in);
 
         System.out.println("Password: ");
         try {
-            password = SHA256.getSHA256HexToString(input.nextLine());
+            // generating the given password to a hex representation, using SHA256
+            hexPwd = SHA256.getSHA256HexToString(input.nextLine());
             System.out.println("OK!");
-            return password;
+            return hexPwd;
         } catch (NoSuchAlgorithmException ex) {
             ex.printStackTrace();
         }

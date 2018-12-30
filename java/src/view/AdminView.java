@@ -3,8 +3,6 @@ package view;
 import menu.Menu;
 import menu.MenuItem;
 
-import java.io.IOException;
-
 public class AdminView {
 
     private static Menu mainmenu;

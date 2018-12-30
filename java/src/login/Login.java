@@ -1,5 +1,6 @@
 package login;
 
+import dao.UserDao;
 import model.User;
 import view.FrontController;
 
@@ -23,36 +24,49 @@ public class Login {
 
     public static void login() {
         boolean validLogin = false;
-        do {
-            controller = new FrontController();
-            input = new Scanner(System.in);
-            String username, password;
+        String answer;
+        input = new Scanner(System.in);
 
-            System.out.println("Give me your login credentials (username, password): ");
-            System.out.print("> ");
-            username = input.next();
+        System.out.print("Do you want to Login [Y/N]: ");
+        answer = input.next("^[Y/N]|^[y/n]");
 
-            System.out.print("> ");
-            password = input.next();
+        if(answer.equalsIgnoreCase("Y")) {
+            do {
+                controller = new FrontController();
+                input = new Scanner(System.in);
+                String username, password;
 
-            if(controller.isAdmin(username, password)) {
-                sendRequest("ADMIN");
-                break;
-            }
-            else if(controller.authenticUser(username, password) != null) {
-                System.out.println("Valid credentials!");
-                sendRequest(controller.authorizedUser(controller.authenticUser(username, password)));
-                break;
-            }
-            else
-                validLogin = false;
+                System.out.println("Give me your login credentials (username, password): ");
+                System.out.print("> ");
+                username = input.next();
 
-        } while(!validLogin);
+                System.out.print("> ");
+                password = input.next();
 
+                if(controller.isAdmin(username, password)) {
+                    getRequest("");
+                }
+                else if(UserDao.getUserByUsernameAndPassword(username, password) != null) {
+                    System.out.println("Valid credentials!");
+
+                    User aUser = UserDao.getUserByUsernameAndPassword(username, password);
+                    getRequest(aUser, aUser.getUserRole());
+                    break;
+                }
+                else
+                    validLogin = false;
+
+            } while(!validLogin);
+        }
+        else {
+            System.out.println("OK, Bye!");
+        }
     }
 
-    private static void sendRequest(String request) {
-        getRequest(request);
+    private static void getRequest(User aUser, String request) {
+        controller = new FrontController();
+
+        controller.dispatchRequest(aUser, request);
     }
 
     private static void getRequest(String request) {

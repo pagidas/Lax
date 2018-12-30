@@ -9,22 +9,16 @@ public class FrontController {
     // Declaring a dispatcher in FrontController
     private final Dispatcher dispatcher = Dispatcher.createDispatcher();
 
-    public User authenticUser(String username, String password) {
-        return UserDao.getUserByUsernameAndPassword(username, password);
-    }
-
-    public String authorizedUser(User authenticUser) {
-        return authenticUser.getUserRole();
-    }
-
     /*
-     *  Reads from an XML file if given credentials are Admin's
+     *  Checks if given username and password
+     *  are the same credentials with those
+     *  in the .xml file.
      */
     public boolean isAdmin(String username, String password) {
-        if((username.equalsIgnoreCase(myFile.readXMLAdminUname())) &&
-            password.equalsIgnoreCase(myFile.readXMLAdminPwd())) {
+        if((username.equalsIgnoreCase(myFile.readXMLAdminUname()) &&
+            password.equalsIgnoreCase(myFile.readXMLAdminPwd()))) {
 
-            System.out.println("User is Admin!");
+            System.out.println("This is Admin!");
             return true;
         }
 
@@ -33,6 +27,12 @@ public class FrontController {
 
     public void trackRequest(String request) {
         System.out.println("Page requested: "+request);
+    }
+
+    public void dispatchRequest(User aUser, String request) {
+        trackRequest(request);
+
+        dispatcher.dispatch(aUser, request);
     }
 
     public void dispatchRequest(String request) {
