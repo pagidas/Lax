@@ -1,6 +1,6 @@
-package view;
-
 import dao.UserDao;
+import files.myFile;
+import login.Login;
 import model.Admin;
 import model.User;
 import sha.SHA256;
@@ -17,7 +17,10 @@ public class Test {
 
     public static void main(String[] args) {
 
-        AdminView adminView = new AdminView().createTheMenu();
-        adminView.displayMenu();
+//        AdminView adminView = new AdminView().createTheMenu();
+//        adminView.displayMenu();
+
+        Login.displayLogin();
+        Login.login();
     }
 }

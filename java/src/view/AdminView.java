@@ -2,7 +2,6 @@ package view;
 
 import menu.Menu;
 import menu.MenuItem;
-import model.Admin;
 
 import java.io.IOException;
 
@@ -26,7 +25,7 @@ public class AdminView {
      */
     AdminView createTheMenu() {
         Menu mainmenu = new Menu();
-        mainmenu.setTitle("*** My Main Menu ***");
+        mainmenu.setTitle("*** Welcome Admin ***");
         mainmenu.addItem(new MenuItem("Create a user", this, "performCreateUser"));
         mainmenu.addItem(new MenuItem("Delete a user", this, "performDeleteUser"));
         mainmenu.addItem(new MenuItem("Logout", this, "performLogout"));
