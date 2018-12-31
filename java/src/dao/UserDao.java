@@ -2,6 +2,9 @@ package dao;
 
 import database.MyDB;
 import model.User;
+import sha.SHA256;
+
+import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
@@ -48,21 +51,26 @@ public class UserDao {
     }
 
     /*
-     * This method is for user authentication. Gets a user from db
-     * by a username and a password and returns a User(object)
+     *  This method is for user authentication. Gets a user from db
+     *  by a username and a password and returns a User(object).
+     *  The password in the database is generated via SHA256.
      */
     public static User getUserByUsernameAndPassword(String username, String password) {
-        StringBuilder sqlQuery = new StringBuilder("SELECT * FROM `lax_db`.`users` ")
-                .append("WHERE username='"+username+"' AND password='"+password+"';");
-
-        ResultSet result = MyDB.connectAndExecute(String.valueOf(sqlQuery), (byte)0);
-
+        String hexPwd;
         try {
+            // generating the given password to hex representation using SHA256
+            hexPwd = SHA256.getSHA256HexToString(password);
+
+            StringBuilder sqlQuery = new StringBuilder("SELECT * FROM `lax_db`.`users` ")
+                    .append("WHERE username='"+username+"' AND password='"+hexPwd+"';");
+
+            ResultSet result = MyDB.connectAndExecute(String.valueOf(sqlQuery), (byte)0);
+
             while(result.next()) {
                 User aUser = extractUserFromResultSet(result);
                 return aUser;
             }
-        } catch (SQLException ex) {
+        } catch (SQLException | NoSuchAlgorithmException ex) {
             ex.printStackTrace();
         }
 
@@ -77,6 +85,7 @@ public class UserDao {
         int affectedRow = MyDB.connectAndExecute(String.valueOf(sqlQuery), (byte)1);
 
         if(affectedRow == 1) {
+            System.out.println("USER HAS BEEN SUCCESSFULLY INSERTED TO THE DATABASE");
             return true;
         }
 
