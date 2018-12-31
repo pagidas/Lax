@@ -2,6 +2,7 @@ package view;
 
 import dao.UserDao;
 import files.myFile;
+import handler.UserHandler;
 import model.User;
 
 public class FrontController {
@@ -25,14 +26,12 @@ public class FrontController {
         return false;
     }
 
-    public void trackRequest(String request) {
-        System.out.println("Page requested: "+request);
+    public User isAuthenticUser(String username, String password) {
+        return UserHandler.isUser(username, password);
     }
 
-    public void dispatchRequest(User aUser, String request) {
-        trackRequest(request);
-
-        dispatcher.dispatch(aUser, request);
+    public void trackRequest(String request) {
+        System.out.println("Page requested: "+request);
     }
 
     public void dispatchRequest(String request) {

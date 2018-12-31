@@ -57,28 +57,36 @@ public class User {
         this.id = id;
     }
 
-    public void setFullname(String fullname) {
+    private void setFullname(String fullname) {
         this.fullname = fullname;
     }
 
-    public void setUsername(String username) {
+    private void setUsername(String username) {
         this.username = username;
     }
 
-    public void setPassword(String password) {
+    private void setPassword(String password) {
         this.password = password;
     }
 
-    public void setUserRole(String userRole) {
+    private void setUserRole(String userRole) {
         this.userRole = userRole;
     }
 
+    /*
+     *  This method is needed to create an object in the back-end,
+     *  and the ID is updated when it is inserted into the database.
+     */
     public static User createUser(String fullname, String username, String password, String userRole) {
         User u = new User(fullname, username, password, userRole);
 
         return u;
     }
 
+    /*
+     *  This method is needed to create an object when fetching
+     *  user's info from database, thus the ID.
+     */
     public static User createUser(int id, String fullname, String username, String password, String userRole) {
         User u = new User(id, fullname, username, password, userRole);
 

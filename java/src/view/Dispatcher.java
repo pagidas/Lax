@@ -2,6 +2,7 @@ package view;
 
 import handler.UserHandler;
 import login.Login;
+import menu.ConsoleUtils;
 import model.User;
 
 /*
@@ -32,33 +33,6 @@ public class Dispatcher {
         return d = new Dispatcher();
     }
 
-    void dispatch(User aUser, String request) {
-
-        if(aUser.getUserRole().equalsIgnoreCase(roles[0])) {
-            if(request.equalsIgnoreCase("MANAGER")) {
-                System.out.println("MANAGER MENU!");
-                // managerView.displayMenu()
-            }
-            // other requests (what manager does)
-        }
-
-        if(aUser.getUserRole().equalsIgnoreCase(roles[1])) {
-            if(request.equalsIgnoreCase("DESIGNER")) {
-                System.out.println("DESIGNER MENU!");
-                // designerView.displayMenu()
-            }
-            // other requests (what designer does)
-        }
-
-        if(aUser.getUserRole().equalsIgnoreCase(roles[2])) {
-            if(request.equalsIgnoreCase("DEVELOPER")) {
-                System.out.println("DEVELOPER MENU!");
-                // developerView.displayMenu()
-            }
-            // other requests (what developer does)
-        }
-    }
-
     void dispatch(String request) {
 
         // View requests
@@ -73,14 +47,19 @@ public class Dispatcher {
         }
 
         if(request.equalsIgnoreCase("DELETE_USER")) {
-            //delete user
-            //adminView.displayMenu();
+            UserHandler.deleteUser();
+            adminView.displayMenu();
         }
 
+        if(request.equalsIgnoreCase("SHOW_ALL_USERS")) {
+            UserHandler.showAllUsers();
+            adminView.displayMenu();
+        }
+
+        // Logout request
         if(request.equalsIgnoreCase("LOGOUT")) {
             System.out.println("Logging out...\n");
             Login.displayLogin();
-            Login.login();
         }
     }
 }

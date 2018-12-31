@@ -26,6 +26,7 @@ public class AdminView {
         mainmenu.setTitle("*** Welcome Admin ***");
         mainmenu.addItem(new MenuItem("Create a user", this, "performCreateUser"));
         mainmenu.addItem(new MenuItem("Delete a user", this, "performDeleteUser"));
+        mainmenu.addItem(new MenuItem("Show all users", this, "performShowAllUsers"));
         mainmenu.addItem(new MenuItem("Logout", this, "performLogout"));
 
         AdminView adminView = new AdminView(mainmenu);
@@ -56,6 +57,8 @@ public class AdminView {
     public void performLogout() {
         getRequest("LOGOUT");
     }
+
+    public void performShowAllUsers() { getRequest("SHOW_ALL_USERS"); }
 
     private void getRequest(String request) {
         controller = new FrontController();

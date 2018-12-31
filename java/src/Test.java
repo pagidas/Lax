@@ -8,6 +8,5 @@ public class Test {
 //        adminView.displayMenu();
 
         Login.displayLogin();
-        Login.login();
     }
 }
