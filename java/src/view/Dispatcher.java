@@ -22,9 +22,9 @@ public class Dispatcher {
     //private default constructor
     private Dispatcher() {
         adminView = new AdminView().createTheMenu();
-        //designerView
-        //managerView
-        //developerView
+        designerView = new DesignerView().createDesignerMenu();
+        developerView = new DeveloperView().createDeveloperMenu();
+        managerView = new ManagerView().createManagerMenu();
     }
 
     static Dispatcher createDispatcher() {
@@ -39,6 +39,16 @@ public class Dispatcher {
         if(request.equalsIgnoreCase("ADMIN")) {
             adminView.displayMenu();
         }
+        else if(request.equalsIgnoreCase("DESIGNER")) {
+            designerView.displayMenu();
+        }
+        else if(request.equalsIgnoreCase("DEVELOPER")) {
+            developerView.displayMenu();
+        }
+        else if(request.equalsIgnoreCase("MANAGER")) {
+            managerView.displayMenu();
+        }
+
 
         // Handler requests
         if(request.equalsIgnoreCase("CREATE_USER")) {

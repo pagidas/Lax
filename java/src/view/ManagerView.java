@@ -5,23 +5,57 @@ import menu.MenuItem;
 
 public class ManagerView {
 
-    private static Menu mainmenu = null;
+    private static Menu mainmenu;
+    private static FrontController controller;
 
-    private ManagerView(Menu mainmenu) {
+    //default constructor so controller to create the menu
+    ManagerView() {}
+
+    //private parameterized constructor which takes the constructed Menu and MenuItem
+    ManagerView(Menu mainmenu) {
         this.mainmenu = mainmenu;
     }
 
-    public static void createManagerMenu() {
+    /*
+     *  This Method which creates a basic Menu with two MenuItem instances,
+     *  calls the private constructor and passes the final menu.
+     *  Returns the ManagerView itself.
+     */
+    ManagerView createManagerMenu() {
         Menu mainmenu = new Menu();
-        mainmenu.setTitle("*** Manager's basic Menu ***");
-        mainmenu.addItem(new MenuItem("View All Issues", mainmenu, "viewAllIssues"));
-        mainmenu.addItem(new MenuItem("View Issues by User", mainmenu, "viewIssuesByUserName"));
-        mainmenu.addItem(new MenuItem("Logout", mainmenu, "logout"));
+        mainmenu.setTitle("*** Developer's basic Menu ***");
+        mainmenu.addItem(new MenuItem("View All Issues", mainmenu, "performViewAllIssues"));
+        mainmenu.addItem(new MenuItem("View all issues by ID", mainmenu, "performViewAllIssuesByID"));
+        mainmenu.addItem(new MenuItem("Logout", mainmenu, "performLogout"));
 
-        ManagerView managerMenu = new ManagerView(mainmenu);
+        ManagerView managerView = new ManagerView(mainmenu);
+
+        return managerView;
     }
 
-    public static void displayManagerMenu() {
-        mainmenu.execute();
+    /*
+     *  This Method displays the Manager's mainmenu, running the execute() in Menu class.
+     *  Returns <T> whatever the 'target' methods return.
+     */
+    <T> T displayMenu() {
+        return mainmenu.execute();
+    }
+
+    /*
+     *  Methods invoked by the Menu, depending on user's action.
+     *  Read Menu.execute() which calls an invoke() on the MenuItem.
+     */
+    public void performViewAllIssues() { getRequest("VIEW_ALL_USSES"); }
+
+    public void performViewAllIssuesByID() { getRequest("VIEW_ALL_ISSUES_BY_ID"); }
+
+    public void performLogout() {
+        getRequest("LOGOUT");
+    }
+
+    private void getRequest(String request) {
+        controller = new FrontController();
+
+        controller.dispatchRequest(request);
     }
 }

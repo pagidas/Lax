@@ -8,11 +8,11 @@ public class AdminView {
     private static Menu mainmenu;
     private static FrontController controller;
 
-    //default constructor in the Controller to create the menu
+    //default constructor so controller to create the menu
     AdminView() {}
 
     //private parameterized constructor which takes the constructed Menu and MenuItem
-    private AdminView(Menu mainmenu) {
+    AdminView(Menu mainmenu) {
         this.mainmenu = mainmenu;
     }
 
@@ -54,11 +54,11 @@ public class AdminView {
         getRequest("DELETE_USER");
     }
 
+    public void performShowAllUsers() { getRequest("SHOW_ALL_USERS"); }
+
     public void performLogout() {
         getRequest("LOGOUT");
     }
-
-    public void performShowAllUsers() { getRequest("SHOW_ALL_USERS"); }
 
     private void getRequest(String request) {
         controller = new FrontController();
