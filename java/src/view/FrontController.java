@@ -4,6 +4,7 @@ import dao.UserDao;
 import files.myFile;
 import handler.UserHandler;
 import model.User;
+import state.Session;
 
 public class FrontController {
 
@@ -38,5 +39,11 @@ public class FrontController {
         trackRequest(request);
 
         dispatcher.dispatch(request);
+    }
+
+    public void dispatchRequest(Session session, String request) {
+        trackRequest(request);
+
+        dispatcher.dispatch(session, request);
     }
 }

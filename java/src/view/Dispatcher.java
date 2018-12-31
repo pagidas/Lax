@@ -4,6 +4,7 @@ import handler.UserHandler;
 import login.Login;
 import menu.ConsoleUtils;
 import model.User;
+import state.Session;
 
 /*
  *  This class has a method which delegates the given request
@@ -33,22 +34,17 @@ public class Dispatcher {
         return d = new Dispatcher();
     }
 
+    /*
+     *  This method delegates requests only for Admin.
+     *  Admin is not a class, but a root username and a password,
+     *  written in a .xml file.
+     */
     void dispatch(String request) {
 
         // View requests
         if(request.equalsIgnoreCase("ADMIN")) {
             adminView.displayMenu();
         }
-        else if(request.equalsIgnoreCase("DESIGNER")) {
-            designerView.displayMenu();
-        }
-        else if(request.equalsIgnoreCase("DEVELOPER")) {
-            developerView.displayMenu();
-        }
-        else if(request.equalsIgnoreCase("MANAGER")) {
-            managerView.displayMenu();
-        }
-
 
         // Handler requests
         if(request.equalsIgnoreCase("CREATE_USER")) {
@@ -66,10 +62,42 @@ public class Dispatcher {
             adminView.displayMenu();
         }
 
+        if(request.equalsIgnoreCase("UPDATE_USER")) {
+            //UserHandler.showAllUsers();
+            //adminView.displayMenu();
+        }
+
         // Logout request
         if(request.equalsIgnoreCase("LOGOUT")) {
             System.out.println("Logging out...\n");
             Login.displayLogin();
         }
+    }
+
+    /*
+     *  This method delegates requests for users (Manager, Developer, Designer),
+     *  using only one session each time, if needed.
+     */
+    void dispatch(Session session, String request) {
+
+        // View requests
+        if(request.equalsIgnoreCase("DESIGNER")) {
+            designerView.displayMenu();
+        }
+        else if(request.equalsIgnoreCase("DEVELOPER")) {
+            developerView.displayMenu();
+        }
+        else if(request.equalsIgnoreCase("MANAGER")) {
+            managerView.displayMenu();
+        }
+
+        // Handler requests
+
+        // Logout request
+        if(request.equalsIgnoreCase("LOGOUT")) {
+            System.out.println("Logging out...\n");
+            Login.displayLogin();
+        }
+
     }
 }

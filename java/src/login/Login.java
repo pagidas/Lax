@@ -1,6 +1,7 @@
 package login;
 
 import model.User;
+import state.Session;
 import view.FrontController;
 
 import java.util.Scanner;
@@ -55,8 +56,14 @@ public class Login {
             }
             else if(controller.isAuthenticUser(username, password) != null) {
                 System.out.println("Valid credentials!");
+
                 User aUser = controller.isAuthenticUser(username, password);
-                getRequest(aUser.getUserRole());
+
+                // Creating a unique session for that user
+                Session session = Session.getInstance();
+                session.setSessionId(aUser.getId());
+
+                getRequest(session, aUser.getUserRole());
             }
             else
                 validLogin = false;
@@ -68,5 +75,11 @@ public class Login {
         controller = new FrontController();
 
         controller.dispatchRequest(request);
+    }
+
+    private static void getRequest(Session session, String request) {
+        controller = new FrontController();
+
+        controller.dispatchRequest(session, request);
     }
 }
