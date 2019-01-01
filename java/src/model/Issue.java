@@ -7,43 +7,43 @@ public class Issue {
     private int id;
     private String content;
     private Date date;
-    private int user_id;
+    private int userId;
 
     /*
-     *  Parameterized constructor when creating a new User and the ID is updated by the Database
+     *  Parameterized constructor when creating a new Issue and the ID and Date is updated by the Database
      */
-    private Issue(String content, Date date, int user_id) {
+    private Issue(String content, int userId) {
         setContent(content);
         setDate(date);
-        setUser_id(user_id);
+        setUserId(userId);
     }
 
     /*
      *  Parameterized constructor when fetching Issue's data from a Database
      */
-    private Issue(int id, String content, Date date, int user_id) {
+    private Issue(int id, String content, Date date, int userId) {
         setId(id);
         setContent(content);
         setDate(date);
-        setUser_id(user_id);
+        setUserId(userId);
     }
 
     /*
      *  This method is needed to create an object in the back-end,
-     *  and the ID is updated when it is inserted into the database.
+     *  and the ID and Date is updated when it is inserted into the database.
      */
-    public static Issue createIssue(String content, Date date, int user_id) {
-        Issue i = new Issue(content, date, user_id);
+    public static Issue createIssue(String content, int userId) {
+        Issue i = new Issue(content,  userId);
 
         return i;
     }
 
     /*
      *  This method is needed to create an object when fetching
-     *  user's info from database, thus the ID.
+     *  issue's info from database, thus the ID.
      */
-    public static Issue createIssue(int id, String content, Date date, int user_id) {
-        Issue i = new Issue(id, content, date, user_id);
+    public static Issue createIssue(int id, String content, Date date, int userId) {
+        Issue i = new Issue(id, content, date, userId);
 
         return i;
     }
@@ -60,8 +60,8 @@ public class Issue {
         return content;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public int getUserId() {
+        return userId;
     }
 
     private void setContent(String content) {
@@ -72,16 +72,17 @@ public class Issue {
 
     private void setId(int id) { this.id = id; }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     @Override
     public String toString() {
         return "Issue{" +
                 "id=" + id +
-                ", date=" + date +
                 ", content='" + content + '\'' +
+                ", date=" + date +
+                ", userId=" + userId +
                 '}';
     }
 }

@@ -2,6 +2,7 @@ package view;
 
 import menu.Menu;
 import menu.MenuItem;
+import state.Session;
 
 public class DeveloperView {
 
@@ -24,9 +25,9 @@ public class DeveloperView {
     DeveloperView createDeveloperMenu() {
         Menu mainmenu = new Menu();
         mainmenu.setTitle("*** Developer's basic Menu ***");
-        mainmenu.addItem(new MenuItem("View All Issues", mainmenu, "performViewAllIssues"));
-        mainmenu.addItem(new MenuItem("Post an Issue", mainmenu, "performPostAnIssue"));
-        mainmenu.addItem(new MenuItem("Logout", mainmenu, "performLogout"));
+        mainmenu.addItem(new MenuItem("View All Issues", this, "performViewAllIssues"));
+        mainmenu.addItem(new MenuItem("Post an Issue", this, "performPostAnIssue"));
+        mainmenu.addItem(new MenuItem("Logout", this, "performLogout"));
 
         DeveloperView developerMenu = new DeveloperView(mainmenu);
 
@@ -45,7 +46,7 @@ public class DeveloperView {
      *  Methods invoked by the Menu, depending on user's action.
      *  Read Menu.execute() which calls an invoke() on the MenuItem.
      */
-    public void performViewAllIssues() { getRequest("VIEW_ALL_USSES"); }
+    public void performViewAllIssues() { getRequest("VIEW_ALL_ISSUES"); }
 
     public void performPostAnIssue() { getRequest("POST_AN_ISSUE"); }
 

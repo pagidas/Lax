@@ -10,6 +10,20 @@ import java.util.Set;
 
 public class IssueDao {
 
+    public static boolean insertIssue(Issue issue) {
+        StringBuilder sqlQuery = new StringBuilder("INSERT INTO `lax_db`.`issues` (`content`, `user_id`) ")
+                .append("VALUES ('"+issue.getContent()+"', '"+issue.getUserId()+"');");
+
+        int affectedRow = MyDB.connectAndExecute(String.valueOf(sqlQuery), (byte)1);
+
+        if(affectedRow == 1) {
+            System.out.println("ISSUE HAS BEEN SUCCESSFULLY INSERTED INTO THE DATABASE");
+            return true;
+        }
+
+        return false;
+    }
+
     public static Set<Issue> getIssuesByUserID(int user_id) {
         Set<Issue> issuesByUser = new HashSet();
         StringBuilder sqlQuery = new StringBuilder("SELECT * FROM `lax_db`.`issues` WHERE user_id="+user_id+";");

@@ -59,11 +59,10 @@ public class Login {
 
                 User aUser = controller.isAuthenticUser(username, password);
 
-                // Creating a unique session for that user
-                Session session = Session.getInstance();
-                session.setSessionId(aUser.getId());
+                // Setting a unique Session for the User
+                Session.getInstance().setSessionId(aUser.getId());
 
-                getRequest(session, aUser.getUserRole());
+                getRequest(aUser.getUserRole());
             }
             else
                 validLogin = false;
@@ -75,11 +74,5 @@ public class Login {
         controller = new FrontController();
 
         controller.dispatchRequest(request);
-    }
-
-    private static void getRequest(Session session, String request) {
-        controller = new FrontController();
-
-        controller.dispatchRequest(session, request);
     }
 }

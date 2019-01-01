@@ -2,6 +2,7 @@ package view;
 
 import menu.Menu;
 import menu.MenuItem;
+import state.Session;
 
 public class ManagerView {
 
@@ -24,9 +25,9 @@ public class ManagerView {
     ManagerView createManagerMenu() {
         Menu mainmenu = new Menu();
         mainmenu.setTitle("*** Developer's basic Menu ***");
-        mainmenu.addItem(new MenuItem("View All Issues", mainmenu, "performViewAllIssues"));
-        mainmenu.addItem(new MenuItem("View all issues by ID", mainmenu, "performViewAllIssuesByID"));
-        mainmenu.addItem(new MenuItem("Logout", mainmenu, "performLogout"));
+        mainmenu.addItem(new MenuItem("View All Issues", this, "performViewAllIssues"));
+        mainmenu.addItem(new MenuItem("View all issues by ID", this, "performViewAllIssuesByID"));
+        mainmenu.addItem(new MenuItem("Logout", this, "performLogout"));
 
         ManagerView managerView = new ManagerView(mainmenu);
 
@@ -45,7 +46,7 @@ public class ManagerView {
      *  Methods invoked by the Menu, depending on user's action.
      *  Read Menu.execute() which calls an invoke() on the MenuItem.
      */
-    public void performViewAllIssues() { getRequest("VIEW_ALL_USSES"); }
+    public void performViewAllIssues() { getRequest("VIEW_ALL_ISSUES"); }
 
     public void performViewAllIssuesByID() { getRequest("VIEW_ALL_ISSUES_BY_ID"); }
 

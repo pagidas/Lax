@@ -35,15 +35,10 @@ public class FrontController {
         System.out.println("Page requested: "+request);
     }
 
+    // dispatches just requests
     public void dispatchRequest(String request) {
         trackRequest(request);
 
         dispatcher.dispatch(request);
-    }
-
-    public void dispatchRequest(Session session, String request) {
-        trackRequest(request);
-
-        dispatcher.dispatch(session, request);
     }
 }

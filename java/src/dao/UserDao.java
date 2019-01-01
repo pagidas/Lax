@@ -85,7 +85,7 @@ public class UserDao {
         int affectedRow = MyDB.connectAndExecute(String.valueOf(sqlQuery), (byte)1);
 
         if(affectedRow == 1) {
-            System.out.println("USER HAS BEEN SUCCESSFULLY INSERTED TO THE DATABASE");
+            System.out.println("USER HAS BEEN SUCCESSFULLY INSERTED INTO THE DATABASE");
             return true;
         }
 

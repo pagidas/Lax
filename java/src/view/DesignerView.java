@@ -2,6 +2,7 @@ package view;
 
 import menu.Menu;
 import menu.MenuItem;
+import state.Session;
 
 public class DesignerView {
 
@@ -24,10 +25,10 @@ public class DesignerView {
     DesignerView createDesignerMenu() {
         Menu mainmenu = new Menu();
         mainmenu.setTitle("*** Designers's basic Menu ***");
-        mainmenu.addItem(new MenuItem("View All Issues", mainmenu, "performViewAllIssues"));
-        mainmenu.addItem(new MenuItem("Post an Issue", mainmenu, "performPostAnIssue"));
-        mainmenu.addItem(new MenuItem("Edit an Issue", mainmenu, "performEditAnIssue"));
-        mainmenu.addItem(new MenuItem("Logout", mainmenu, "performLogout"));
+        mainmenu.addItem(new MenuItem("View All Issues", this, "performViewAllIssues"));
+        mainmenu.addItem(new MenuItem("Post an Issue", this, "performPostAnIssue"));
+        mainmenu.addItem(new MenuItem("Edit an Issue", this, "performEditAnIssue"));
+        mainmenu.addItem(new MenuItem("Logout", this, "performLogout"));
 
         DesignerView designerMenu = new DesignerView(mainmenu);
 
@@ -42,19 +43,13 @@ public class DesignerView {
         return mainmenu.execute();
     }
 
-    /*
-     *  Methods invoked by the Menu, depending on user's action.
-     *  Read Menu.execute() which calls an invoke() on the MenuItem.
-     */
-    public void performViewAllIssues() { getRequest("VIEW_ALL_USSES"); }
+    public void performViewAllIssues() { getRequest("VIEW_ALL_ISSSES"); }
 
     public void performPostAnIssue() { getRequest("POST_AN_ISSUE"); }
 
     public void performEditAnissue() { getRequest("EDIT_AN_ISSUE"); }
 
-    public void performLogout() {
-        getRequest("LOGOUT");
-    }
+    public void performLogout() { getRequest("LOGOUT"); }
 
     private void getRequest(String request) {
         controller = new FrontController();

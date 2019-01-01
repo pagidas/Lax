@@ -1,9 +1,9 @@
 package view;
 
+import dao.UserDao;
+import handler.IssueHandler;
 import handler.UserHandler;
 import login.Login;
-import menu.ConsoleUtils;
-import model.User;
 import state.Session;
 
 /*
@@ -45,6 +45,15 @@ public class Dispatcher {
         if(request.equalsIgnoreCase("ADMIN")) {
             adminView.displayMenu();
         }
+        else if(request.equalsIgnoreCase("DESIGNER")) {
+            designerView.displayMenu();
+        }
+        else if(request.equalsIgnoreCase("DEVELOPER")) {
+            developerView.displayMenu();
+        }
+        else if(request.equalsIgnoreCase("MANAGER")) {
+            managerView.displayMenu();
+        }
 
         // Handler requests
         if(request.equalsIgnoreCase("CREATE_USER")) {
@@ -61,43 +70,28 @@ public class Dispatcher {
             UserHandler.showAllUsers();
             adminView.displayMenu();
         }
-
         if(request.equalsIgnoreCase("UPDATE_USER")) {
             //UserHandler.showAllUsers();
             //adminView.displayMenu();
         }
+        if(request.equalsIgnoreCase("POST_AN_ISSUE")) {
+
+            // getting the user_id from session
+            int userId = Session.getInstance().getSessionId();
+
+            IssueHandler.postIssue(userId);
+
+            // getting back the original view
+            if(UserDao.getUser(userId).getUserRole().equalsIgnoreCase("DESIGNER"))
+                designerView.displayMenu();
+            else if(UserDao.getUser(userId).getUserRole().equalsIgnoreCase("DEVELOPER"))
+                developerView.displayMenu();
+        }
 
         // Logout request
         if(request.equalsIgnoreCase("LOGOUT")) {
             System.out.println("Logging out...\n");
             Login.displayLogin();
         }
-    }
-
-    /*
-     *  This method delegates requests for users (Manager, Developer, Designer),
-     *  using only one session each time, if needed.
-     */
-    void dispatch(Session session, String request) {
-
-        // View requests
-        if(request.equalsIgnoreCase("DESIGNER")) {
-            designerView.displayMenu();
-        }
-        else if(request.equalsIgnoreCase("DEVELOPER")) {
-            developerView.displayMenu();
-        }
-        else if(request.equalsIgnoreCase("MANAGER")) {
-            managerView.displayMenu();
-        }
-
-        // Handler requests
-
-        // Logout request
-        if(request.equalsIgnoreCase("LOGOUT")) {
-            System.out.println("Logging out...\n");
-            Login.displayLogin();
-        }
-
     }
 }
