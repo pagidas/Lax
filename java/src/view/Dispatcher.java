@@ -1,9 +1,12 @@
 package view;
 
+import com.sun.org.apache.regexp.internal.RE;
 import dao.UserDao;
 import handler.IssueHandler;
 import handler.UserHandler;
 import login.Login;
+import model.Issue;
+import model.User;
 import state.Session;
 
 /*
@@ -70,10 +73,7 @@ public class Dispatcher {
             UserHandler.showAllUsers();
             adminView.displayMenu();
         }
-        if(request.equalsIgnoreCase("UPDATE_USER")) {
-            //UserHandler.showAllUsers();
-            //adminView.displayMenu();
-        }
+
         if(request.equalsIgnoreCase("POST_AN_ISSUE")) {
 
             // getting the user_id from session
@@ -86,6 +86,83 @@ public class Dispatcher {
                 designerView.displayMenu();
             else if(UserDao.getUser(userId).getUserRole().equalsIgnoreCase("DEVELOPER"))
                 developerView.displayMenu();
+            else if(UserDao.getUser(userId).getUserRole().equalsIgnoreCase("MANAGER"))
+                managerView.displayMenu();
+        }
+        if(request.equalsIgnoreCase("VIEW_ALL_ISSUES")) {
+
+            // getting the user_id from session
+            int userId = Session.getInstance().getSessionId();
+
+            IssueHandler.showAllIssues();
+
+            // getting back the original view
+            if(UserDao.getUser(userId).getUserRole().equalsIgnoreCase("DESIGNER"))
+                designerView.displayMenu();
+            else if(UserDao.getUser(userId).getUserRole().equalsIgnoreCase("DEVELOPER"))
+                developerView.displayMenu();
+            else if(UserDao.getUser(userId).getUserRole().equalsIgnoreCase("MANAGER"))
+                managerView.displayMenu();
+        }
+        if(request.equalsIgnoreCase("EDIT_AN_ISSUE")) {
+
+            // getting the user_id from session
+            int userId = Session.getInstance().getSessionId();
+
+            IssueHandler.editAnIssue();
+
+            // getting back the original view
+            if(UserDao.getUser(userId).getUserRole().equalsIgnoreCase("DESIGNER"))
+                designerView.displayMenu();
+            else if(UserDao.getUser(userId).getUserRole().equalsIgnoreCase("DEVELOPER"))
+                developerView.displayMenu();
+            else if(UserDao.getUser(userId).getUserRole().equalsIgnoreCase("MANAGER"))
+                managerView.displayMenu();
+        }
+        if(request.equalsIgnoreCase("DELETE_AN_ISSUE")) {
+
+            // getting the user_id from session
+            int userId = Session.getInstance().getSessionId();
+
+            IssueHandler.deleteIssue();
+
+            // getting back the original view
+            if(UserDao.getUser(userId).getUserRole().equalsIgnoreCase("DESIGNER"))
+                designerView.displayMenu();
+            else if(UserDao.getUser(userId).getUserRole().equalsIgnoreCase("DEVELOPER"))
+                developerView.displayMenu();
+            else if(UserDao.getUser(userId).getUserRole().equalsIgnoreCase("MANAGER"))
+                managerView.displayMenu();
+        }
+        if(request.equalsIgnoreCase("VIEW_ALL_ISSUES_BY_ID")) {
+
+            // getting the user_id from session
+            int userId = Session.getInstance().getSessionId();
+
+            IssueHandler.viewIssuesByUser();
+
+            // getting back the original view
+            if(UserDao.getUser(userId).getUserRole().equalsIgnoreCase("DESIGNER"))
+                designerView.displayMenu();
+            else if(UserDao.getUser(userId).getUserRole().equalsIgnoreCase("DEVELOPER"))
+                developerView.displayMenu();
+            else if(UserDao.getUser(userId).getUserRole().equalsIgnoreCase("MANAGER"))
+                managerView.displayMenu();
+        }
+        if(request.equalsIgnoreCase("VIEW_ALL_USERS")) {
+
+            // getting the user_id from session
+            int userId = Session.getInstance().getSessionId();
+
+            IssueHandler.viewAllUsers();
+
+            // getting back the original view
+            if(UserDao.getUser(userId).getUserRole().equalsIgnoreCase("DESIGNER"))
+                designerView.displayMenu();
+            else if(UserDao.getUser(userId).getUserRole().equalsIgnoreCase("DEVELOPER"))
+                developerView.displayMenu();
+            else if(UserDao.getUser(userId).getUserRole().equalsIgnoreCase("MANAGER"))
+                managerView.displayMenu();
         }
 
         // Logout request

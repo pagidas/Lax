@@ -17,7 +17,9 @@ public class UserHandler {
 
     public static void createUser() {
         // Creates a User object and inserts into database
-        UserDao.insertUser(User.createUser(setFullName(), setUsername(), setPassword(), setUserRole()));
+        if(UserDao.insertUser(User.createUser(setFullName(), setUsername(), setPassword(), setUserRole())))
+            System.out.println("USER HAS BEEN SUCCESSFULLY INSERTED INTO THE DATABASE");
+
     }
 
     public static void deleteUser() {
@@ -25,7 +27,7 @@ public class UserHandler {
 
         System.out.print("Delete by ID > ");
         if(UserDao.deleteUser(input.nextInt()))
-            System.out.println("User successfully deleted!");
+            System.out.println("USER HAS BEEN SUCCESSFULLY DELETED");
         else
             System.out.println("Wrong ID!");
 

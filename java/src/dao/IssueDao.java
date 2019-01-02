@@ -16,17 +16,39 @@ public class IssueDao {
 
         int affectedRow = MyDB.connectAndExecute(String.valueOf(sqlQuery), (byte)1);
 
-        if(affectedRow == 1) {
-            System.out.println("ISSUE HAS BEEN SUCCESSFULLY INSERTED INTO THE DATABASE");
+        if(affectedRow == 1)
             return true;
-        }
 
         return false;
     }
 
-    public static Set<Issue> getIssuesByUserID(int user_id) {
+    public static boolean deleteIssue(int id) {
+        StringBuilder sqlQuery = new StringBuilder("DELETE FROM `lax_db`.`issues` WHERE id="+id+";");
+
+        int affectedRow = MyDB.connectAndExecute(String.valueOf(sqlQuery), (byte)1);
+
+        if(affectedRow == 1)
+            return true;
+
+        return false;
+    }
+
+    public static boolean updateIssue(int id, String content) {
+        StringBuilder sqlQuery = new StringBuilder("UPDATE `lax_db`.`issues` ")
+                .append("SET content='"+content+"' WHERE id="+id+";");
+
+        int affectedRow = MyDB.connectAndExecute(String.valueOf(sqlQuery), (byte)1);
+
+
+        if(affectedRow == 1)
+            return true;
+
+        return false;
+    }
+
+    public static Set<Issue> getIssuesByUserID(int userId) {
         Set<Issue> issuesByUser = new HashSet();
-        StringBuilder sqlQuery = new StringBuilder("SELECT * FROM `lax_db`.`issues` WHERE user_id="+user_id+";");
+        StringBuilder sqlQuery = new StringBuilder("SELECT * FROM `lax_db`.`issues` WHERE user_id="+userId+";");
 
         ResultSet result = MyDB.connectAndExecute(String.valueOf(sqlQuery), (byte)0);
 

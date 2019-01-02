@@ -28,6 +28,7 @@ public class DesignerView {
         mainmenu.addItem(new MenuItem("View All Issues", this, "performViewAllIssues"));
         mainmenu.addItem(new MenuItem("Post an Issue", this, "performPostAnIssue"));
         mainmenu.addItem(new MenuItem("Edit an Issue", this, "performEditAnIssue"));
+        mainmenu.addItem(new MenuItem("Delete an Issue", this, "performDeleteAnIssue"));
         mainmenu.addItem(new MenuItem("Logout", this, "performLogout"));
 
         DesignerView designerMenu = new DesignerView(mainmenu);
@@ -43,11 +44,13 @@ public class DesignerView {
         return mainmenu.execute();
     }
 
-    public void performViewAllIssues() { getRequest("VIEW_ALL_ISSSES"); }
+    public void performViewAllIssues() { getRequest("VIEW_ALL_ISSUES"); }
 
     public void performPostAnIssue() { getRequest("POST_AN_ISSUE"); }
 
-    public void performEditAnissue() { getRequest("EDIT_AN_ISSUE"); }
+    public void performEditAnIssue() { getRequest("EDIT_AN_ISSUE"); }
+
+    public void performDeleteAnIssue() { getRequest("DELETE_AN_ISSUE"); }
 
     public void performLogout() { getRequest("LOGOUT"); }
 

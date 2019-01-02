@@ -27,6 +27,7 @@ public class ManagerView {
         mainmenu.setTitle("*** Developer's basic Menu ***");
         mainmenu.addItem(new MenuItem("View All Issues", this, "performViewAllIssues"));
         mainmenu.addItem(new MenuItem("View all issues by ID", this, "performViewAllIssuesByID"));
+        mainmenu.addItem(new MenuItem("View all Users", this, "performViewAllUsers"));
         mainmenu.addItem(new MenuItem("Logout", this, "performLogout"));
 
         ManagerView managerView = new ManagerView(mainmenu);
@@ -53,6 +54,8 @@ public class ManagerView {
     public void performLogout() {
         getRequest("LOGOUT");
     }
+
+    public void performViewAllUsers() { getRequest("VIEW_ALL_USERS"); }
 
     private void getRequest(String request) {
         controller = new FrontController();
