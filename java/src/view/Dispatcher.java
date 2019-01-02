@@ -1,8 +1,13 @@
 package view;
 
+import com.sun.org.apache.regexp.internal.RE;
+import dao.UserDao;
+import handler.IssueHandler;
 import handler.UserHandler;
 import login.Login;
+import model.Issue;
 import model.User;
+import state.Session;
 
 /*
  *  This class has a method which delegates the given request
@@ -21,9 +26,9 @@ public class Dispatcher {
     //private default constructor
     private Dispatcher() {
         adminView = new AdminView().createTheMenu();
-        //designerView
-        //managerView
-        //developerView
+        designerView = new DesignerView().createDesignerMenu();
+        developerView = new DeveloperView().createDeveloperMenu();
+        managerView = new ManagerView().createManagerMenu();
     }
 
     static Dispatcher createDispatcher() {
@@ -32,38 +37,25 @@ public class Dispatcher {
         return d = new Dispatcher();
     }
 
-    void dispatch(User aUser, String request) {
-
-        if(aUser.getUserRole().equalsIgnoreCase(roles[0])) {
-            if(request.equalsIgnoreCase("MANAGER")) {
-                System.out.println("MANAGER MENU!");
-                // managerView.displayMenu()
-            }
-            // other requests (what manager does)
-        }
-
-        if(aUser.getUserRole().equalsIgnoreCase(roles[1])) {
-            if(request.equalsIgnoreCase("DESIGNER")) {
-                System.out.println("DESIGNER MENU!");
-                // designerView.displayMenu()
-            }
-            // other requests (what designer does)
-        }
-
-        if(aUser.getUserRole().equalsIgnoreCase(roles[2])) {
-            if(request.equalsIgnoreCase("DEVELOPER")) {
-                System.out.println("DEVELOPER MENU!");
-                // developerView.displayMenu()
-            }
-            // other requests (what developer does)
-        }
-    }
-
+    /*
+     *  This method delegates requests only for Admin.
+     *  Admin is not a class, but a root username and a password,
+     *  written in a .xml file.
+     */
     void dispatch(String request) {
 
         // View requests
         if(request.equalsIgnoreCase("ADMIN")) {
             adminView.displayMenu();
+        }
+        else if(request.equalsIgnoreCase("DESIGNER")) {
+            designerView.displayMenu();
+        }
+        else if(request.equalsIgnoreCase("DEVELOPER")) {
+            developerView.displayMenu();
+        }
+        else if(request.equalsIgnoreCase("MANAGER")) {
+            managerView.displayMenu();
         }
 
         // Handler requests
@@ -73,14 +65,110 @@ public class Dispatcher {
         }
 
         if(request.equalsIgnoreCase("DELETE_USER")) {
-            //delete user
-            //adminView.displayMenu();
+            UserHandler.deleteUser();
+            adminView.displayMenu();
         }
 
+        if(request.equalsIgnoreCase("SHOW_ALL_USERS")) {
+            UserHandler.showAllUsers();
+            adminView.displayMenu();
+        }
+
+        if(request.equalsIgnoreCase("POST_AN_ISSUE")) {
+
+            // getting the user_id from session
+            int userId = Session.getInstance().getSessionId();
+
+            IssueHandler.postIssue(userId);
+
+            // getting back the original view
+            if(UserDao.getUser(userId).getUserRole().equalsIgnoreCase("DESIGNER"))
+                designerView.displayMenu();
+            else if(UserDao.getUser(userId).getUserRole().equalsIgnoreCase("DEVELOPER"))
+                developerView.displayMenu();
+            else if(UserDao.getUser(userId).getUserRole().equalsIgnoreCase("MANAGER"))
+                managerView.displayMenu();
+        }
+        if(request.equalsIgnoreCase("VIEW_ALL_ISSUES")) {
+
+            // getting the user_id from session
+            int userId = Session.getInstance().getSessionId();
+
+            IssueHandler.showAllIssues();
+
+            // getting back the original view
+            if(UserDao.getUser(userId).getUserRole().equalsIgnoreCase("DESIGNER"))
+                designerView.displayMenu();
+            else if(UserDao.getUser(userId).getUserRole().equalsIgnoreCase("DEVELOPER"))
+                developerView.displayMenu();
+            else if(UserDao.getUser(userId).getUserRole().equalsIgnoreCase("MANAGER"))
+                managerView.displayMenu();
+        }
+        if(request.equalsIgnoreCase("EDIT_AN_ISSUE")) {
+
+            // getting the user_id from session
+            int userId = Session.getInstance().getSessionId();
+
+            IssueHandler.editAnIssue();
+
+            // getting back the original view
+            if(UserDao.getUser(userId).getUserRole().equalsIgnoreCase("DESIGNER"))
+                designerView.displayMenu();
+            else if(UserDao.getUser(userId).getUserRole().equalsIgnoreCase("DEVELOPER"))
+                developerView.displayMenu();
+            else if(UserDao.getUser(userId).getUserRole().equalsIgnoreCase("MANAGER"))
+                managerView.displayMenu();
+        }
+        if(request.equalsIgnoreCase("DELETE_AN_ISSUE")) {
+
+            // getting the user_id from session
+            int userId = Session.getInstance().getSessionId();
+
+            IssueHandler.deleteIssue();
+
+            // getting back the original view
+            if(UserDao.getUser(userId).getUserRole().equalsIgnoreCase("DESIGNER"))
+                designerView.displayMenu();
+            else if(UserDao.getUser(userId).getUserRole().equalsIgnoreCase("DEVELOPER"))
+                developerView.displayMenu();
+            else if(UserDao.getUser(userId).getUserRole().equalsIgnoreCase("MANAGER"))
+                managerView.displayMenu();
+        }
+        if(request.equalsIgnoreCase("VIEW_ALL_ISSUES_BY_ID")) {
+
+            // getting the user_id from session
+            int userId = Session.getInstance().getSessionId();
+
+            IssueHandler.viewIssuesByUser();
+
+            // getting back the original view
+            if(UserDao.getUser(userId).getUserRole().equalsIgnoreCase("DESIGNER"))
+                designerView.displayMenu();
+            else if(UserDao.getUser(userId).getUserRole().equalsIgnoreCase("DEVELOPER"))
+                developerView.displayMenu();
+            else if(UserDao.getUser(userId).getUserRole().equalsIgnoreCase("MANAGER"))
+                managerView.displayMenu();
+        }
+        if(request.equalsIgnoreCase("VIEW_ALL_USERS")) {
+
+            // getting the user_id from session
+            int userId = Session.getInstance().getSessionId();
+
+            IssueHandler.viewAllUsers();
+
+            // getting back the original view
+            if(UserDao.getUser(userId).getUserRole().equalsIgnoreCase("DESIGNER"))
+                designerView.displayMenu();
+            else if(UserDao.getUser(userId).getUserRole().equalsIgnoreCase("DEVELOPER"))
+                developerView.displayMenu();
+            else if(UserDao.getUser(userId).getUserRole().equalsIgnoreCase("MANAGER"))
+                managerView.displayMenu();
+        }
+
+        // Logout request
         if(request.equalsIgnoreCase("LOGOUT")) {
             System.out.println("Logging out...\n");
             Login.displayLogin();
-            Login.login();
         }
     }
 }

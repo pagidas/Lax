@@ -5,6 +5,7 @@ import model.User;
 import sha.SHA256;
 import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 public class UserHandler {
@@ -16,10 +17,35 @@ public class UserHandler {
 
     public static void createUser() {
         // Creates a User object and inserts into database
-        UserDao.insertUser(User.createUser(setFullName(), setUsername(), setPassword(), setUserRole()));
+        if(UserDao.insertUser(User.createUser(setFullName(), setUsername(), setPassword(), setUserRole())))
+            System.out.println("USER HAS BEEN SUCCESSFULLY INSERTED INTO THE DATABASE");
+
     }
 
-    public static void deleteUser() {}
+    public static void deleteUser() {
+        input = new Scanner(System.in);
+
+        System.out.print("Delete by ID > ");
+        if(UserDao.deleteUser(input.nextInt()))
+            System.out.println("USER HAS BEEN SUCCESSFULLY DELETED");
+        else
+            System.out.println("Wrong ID!");
+
+    }
+
+    public static void showAllUsers() {
+        Set<User> users = UserDao.getAllUsers();
+
+        System.out.println("\nID\t\tFull Name\t\t\t\tRole");
+        System.out.println("-----------------------------------------");
+        for(User aUser : users) {
+            System.out.println(aUser.getId()+"\t\t"+aUser.getFullname()+"\t\t\t"+aUser.getUserRole());
+        }
+    }
+
+    public static User isUser(String username, String password) {
+        return UserDao.getUserByUsernameAndPassword(username, password);
+    }
 
     private static String setFullName() {
         String fullName = null;
@@ -90,6 +116,4 @@ public class UserHandler {
         System.out.println("Full Name must be in the form of: 'Name Surname'");
         return false;
     }
-
-    private static boolean isUsernameUnique() { return false; }
 }

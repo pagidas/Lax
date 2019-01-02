@@ -2,26 +2,61 @@ package view;
 
 import menu.Menu;
 import menu.MenuItem;
+import state.Session;
 
 public class DesignerView {
 
-    private static Menu mainmenu = null;
+    private static Menu mainmenu;
+    private static FrontController controller;
 
-    private DesignerView(Menu mainmenu) {
+    //default constructor so controller to create the menu
+    DesignerView() {}
+
+    //private parameterized constructor which takes the constructed Menu and MenuItem
+    DesignerView(Menu mainmenu) {
         this.mainmenu = mainmenu;
     }
 
-    public static void createDesignerMenu() {
+    /*
+     *  This Method which creates a basic Menu with two MenuItem instances,
+     *  calls the private constructor and passes the final menu.
+     *  Returns the DesignerView itself.
+     */
+    DesignerView createDesignerMenu() {
         Menu mainmenu = new Menu();
         mainmenu.setTitle("*** Designers's basic Menu ***");
-        mainmenu.addItem(new MenuItem("View All Issues", mainmenu, "viewAllIssues"));
-        mainmenu.addItem(new MenuItem("Post an Issue", mainmenu, "postAnIssue"));
-        mainmenu.addItem(new MenuItem("Logout", mainmenu, "logout"));
+        mainmenu.addItem(new MenuItem("View All Issues", this, "performViewAllIssues"));
+        mainmenu.addItem(new MenuItem("Post an Issue", this, "performPostAnIssue"));
+        mainmenu.addItem(new MenuItem("Edit an Issue", this, "performEditAnIssue"));
+        mainmenu.addItem(new MenuItem("Delete an Issue", this, "performDeleteAnIssue"));
+        mainmenu.addItem(new MenuItem("Logout", this, "performLogout"));
 
         DesignerView designerMenu = new DesignerView(mainmenu);
+
+        return designerMenu;
     }
 
-    public static void displayDesignerMenu() {
-        mainmenu.execute();
+    /*
+     *  This Method displays the Designer's mainmenu, running the execute() in Menu class.
+     *  Returns <T> whatever the 'target' methods return.
+     */
+    <T> T displayMenu() {
+        return mainmenu.execute();
+    }
+
+    public void performViewAllIssues() { getRequest("VIEW_ALL_ISSUES"); }
+
+    public void performPostAnIssue() { getRequest("POST_AN_ISSUE"); }
+
+    public void performEditAnIssue() { getRequest("EDIT_AN_ISSUE"); }
+
+    public void performDeleteAnIssue() { getRequest("DELETE_AN_ISSUE"); }
+
+    public void performLogout() { getRequest("LOGOUT"); }
+
+    private void getRequest(String request) {
+        controller = new FrontController();
+
+        controller.dispatchRequest(request);
     }
 }
